@@ -6,4 +6,7 @@ package com.iweb.arui.pojo;
  * 2023/6/10
  */
 public class Report {
+    private long id;
+    private String reportName;
+    private String reportMsg;
 }

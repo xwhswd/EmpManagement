@@ -6,4 +6,7 @@ package com.iweb.arui.pojo;
  * 2023/6/10
  */
 public class Department {
+    private long id;
+    private String deptName;
+
 }
