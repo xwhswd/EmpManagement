@@ -6,4 +6,6 @@ package com.iweb.arui.service;
  * 2023/6/10
  */
 public interface UserService {
+    void login();
+    void register();
 }
