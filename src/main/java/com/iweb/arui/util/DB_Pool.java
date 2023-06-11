@@ -11,9 +11,9 @@ import java.util.List;
  * 2023/6/10
  */
 public class DB_Pool {
-    List<Connection> cs = new ArrayList<>();
+    static List<Connection> cs = new ArrayList<>();
     //定义变量指定连接池大小
-    int size;
+    static int size;
 
 
     //定义初始化方法,用来创建连接对象
@@ -38,7 +38,7 @@ public class DB_Pool {
     public static synchronized Connection getConnection() {
         while (cs.isEmpty()) {
             try {
-                this.wait();
+                DB_Pool.class.wait();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
