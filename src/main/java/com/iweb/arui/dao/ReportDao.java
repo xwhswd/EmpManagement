@@ -10,9 +10,9 @@ import java.util.List;
  * 2023/6/10
  */
 public interface ReportDao {
-    void add(Report report);
-    void delete(Report report);
-    void update(Report report);
+    boolean add(Report report);
+    boolean delete(Report report);
+    boolean update(Report report);
     List<Report> selectAll();
     List<Report> selectFuzzy(Report report);
 }

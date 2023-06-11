@@ -31,19 +31,15 @@ public class ServerThread extends Thread{
                 dis = new DataInputStream(is);
                 String str = dis.readUTF();
                 System.out.println(socket.getInetAddress() + ":" + str);
-                //遍历所有socket,向用户广播消息
-                Iterator<Socket> iterator = list.iterator();
-                while (iterator.hasNext()) {
-                    Socket st = iterator.next();
-                    if (st.isConnected()) {
-                        os = st.getOutputStream();
-                        dos = new DataOutputStream(os);
-                        dos.writeUTF(socket.getInetAddress() + ":" + str);
-                    } else {
-                        synchronized (list) {
-                            iterator.remove();
-                            System.out.println(st.getInetAddress() + "已经关闭连接" + list.size());
-                        }
+
+                if (socket.isConnected()) {
+                    os = socket.getOutputStream();
+                    dos = new DataOutputStream(os);
+                    dos.writeUTF(socket.getInetAddress() + ":" + str);
+                } else {
+                    synchronized (list) {
+                        list.remove(socket);
+                        System.out.println(socket.getInetAddress() + "已经退出聊天室,当前在线人数为" + list.size());
                     }
                 }
             }

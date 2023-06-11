@@ -10,9 +10,9 @@ import java.util.List;
  * 2023/6/10
  */
 public interface DepartmentDao {
-    void add(Department depart);
-    void delete(Department depart);
-    void update(Department depart);
+    boolean add(Department depart);
+    boolean delete(Department depart);
+    boolean update(Department depart);
     List<Department> selectAll();
     List<Department> selectFuzzy(Department depart);
 }

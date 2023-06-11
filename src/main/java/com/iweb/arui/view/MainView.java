@@ -16,7 +16,11 @@ import java.util.Scanner;
  */
 public class MainView {
     private static Scanner sc = new Scanner(System.in);
-    private static UserService userService = new UserServiceImpl();
+    private static UserService userService;
+
+    static {
+        userService = new UserServiceImpl();
+    }
 
     public static void mainView() {
         Print.print("欢迎来到员工管理系统");
@@ -25,8 +29,6 @@ public class MainView {
         Print.print("2.注册");
         Print.print("3.管理员登录");
         String choose = sc.nextLine();
-        //应该根据用户的输入的选择 跳转不到的页面
-        //注意 需要控制异常输入的情况
         UserController.mainController(choose);
     }
 

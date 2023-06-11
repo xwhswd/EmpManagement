@@ -1,6 +1,8 @@
 package com.iweb.arui.controller;
 
 import com.iweb.arui.Main;
+import com.iweb.arui.service.UserService;
+import com.iweb.arui.service.impl.UserServiceImpl;
 import com.iweb.arui.util.Print;
 import com.iweb.arui.view.AdminView;
 import com.iweb.arui.view.MainView;
@@ -11,6 +13,7 @@ import com.iweb.arui.view.MainView;
  * 2023/6/10
  */
 public class UserController {
+
     public static void mainController(String choose) {
         switch (choose) {
             case "1":

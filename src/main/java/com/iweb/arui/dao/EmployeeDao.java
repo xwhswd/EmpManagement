@@ -10,9 +10,9 @@ import java.util.List;
  * 2023/6/10
  */
 public interface EmployeeDao {
-    void add(Employee emp);
-    void delete(Employee emp);
-    void update(Employee emp);
+    boolean add(Employee emp);
+    boolean delete(Employee emp);
+    boolean update(Employee emp);
     List<Employee> selectAll();
     List<Employee> selectFuzzy(Employee emp);
 }

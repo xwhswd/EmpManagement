@@ -10,9 +10,10 @@ import java.util.List;
  * 2023/6/10
  */
 public interface UserDao {
-    void add(User user);
-    void delete(User user);
-    void update(User user);
+    boolean add(User user);
+    boolean delete(User user);
+    boolean update(User user);
     List<User> selectAll();
     List<User> selectFuzzy(User user);
+    User selectByUsername(String username);
 }

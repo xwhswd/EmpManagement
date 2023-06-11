@@ -35,7 +35,7 @@ public class DB_Pool {
         init();
     }
 
-    public synchronized Connection getConnection() {
+    public static synchronized Connection getConnection() {
         while (cs.isEmpty()) {
             try {
                 this.wait();

@@ -1,5 +1,6 @@
 package com.iweb.arui.view;
 
+import com.iweb.arui.Main;
 import com.iweb.arui.util.Print;
 import com.iweb.arui.util.StringUtil;
 
@@ -23,11 +24,19 @@ public class AdminView {
         Print.print("验证码为:" + randomConfirmCode);
         Print.print("请输入您的验证码");
         String inputConfirmCode = sc.nextLine();
-        //调用业务类 进行登录的逻辑判断 根据业务类返回的boolean值结果决定
-        //下一步如何实现
-        //封装数据
-//        User inputUser = new User(inputUserName, inputPassword, null);
-//        userService.login(inputUser, randomConfirmCode, inputConfirmCode);
 
     }
+
+
+    public static void adminView() {
+        Print.print("欢迎你,尊贵的用户,"+ Main.currentUser+"请选择你要访问的功能");
+        Print.print("1.查看用户信息");
+        Print.print("2.修改用户信息");
+        Print.print("3.退出登录");
+        Print.print("4.注销用户");
+        Print.print("5.返回主页面");
+        String choose = sc.nextLine();
+//        UserController.userInfo(choose);
+    }
+
 }

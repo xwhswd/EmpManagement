@@ -1,6 +1,11 @@
 package com.iweb.arui.service.impl;
 
+import com.iweb.arui.dao.UserDao;
+import com.iweb.arui.dao.impl.UserDaoImpl;
+import com.iweb.arui.pojo.User;
 import com.iweb.arui.service.UserService;
+
+import java.util.List;
 
 /**
  * @author xwh
@@ -8,13 +13,38 @@ import com.iweb.arui.service.UserService;
  * 2023/6/10
  */
 public class UserServiceImpl implements UserService {
-    @Override
-    public void login() {
-
+    private static UserDao userDao;
+    static {
+        userDao=new UserDaoImpl();
     }
 
     @Override
-    public void register() {
+    public boolean login(User user) {
+        return false;
+    }
 
+    @Override
+    public boolean register(User user) {
+        return false;
+    }
+
+    @Override
+    public boolean unregister(User user) {
+        return false;
+    }
+
+    @Override
+    public boolean updateUser(User user) {
+        return false;
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return null;
+    }
+
+    @Override
+    public List<User> searchUser(User user) {
+        return null;
     }
 }

@@ -11,9 +11,9 @@ import java.util.List;
  * 2023/6/10
  */
 public interface PostDao {
-    void add(Post post);
-    void delete(Post post);
-    void update(Post post);
+    boolean add(Post post);
+    boolean delete(Post post);
+    boolean update(Post post);
     List<Post> selectAll();
     List<Post> selectFuzzy(Post post);
 }
