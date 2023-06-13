@@ -20,26 +20,45 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public boolean deleteReport(Report report) {
-        return false;
+        if (report==null){
+            return false;
+        }
+        return reportDao.delete(report);
     }
 
     @Override
     public boolean generateReport(Report report) {
-        return false;
+        if (report==null){
+            return false;
+        }
+        return reportDao.add(report);
     }
 
     @Override
-    public boolean selectAllReport(Report report) {
-        return false;
+    public List<Report> selectAllReport() {
+        return reportDao.selectAll();
     }
 
     @Override
-    public List<Report> selectReportByKey() {
-        return null;
+    public List<Report> selectReportByKey(Report report) {
+        return reportDao.selectFuzzy(report);
     }
 
     @Override
-    public List<Report> updateReport(Report report) {
-        return null;
+    public boolean updateReport(Report report) {
+        if (report==null){
+            return false;
+        }
+        return reportDao.update(report);
     }
+
+    @Override
+    public Report getNewestReport() {
+        List<Report> list = selectAllReport();
+        if (list==null){
+            return new Report(0,"","");
+        }
+        return list.get(list.size()-1);
+    }
+
 }

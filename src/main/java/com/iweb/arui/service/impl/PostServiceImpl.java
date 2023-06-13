@@ -20,26 +20,38 @@ public class PostServiceImpl implements PostService {
     }
     @Override
     public boolean addPost(Post post) {
-        return false;
+        if (post==null){
+            return false;
+        }
+        return postDao.add(post);
     }
 
     @Override
     public boolean deletePost(Post post) {
-        return false;
+        if (post==null){
+            return false;
+        }
+        return postDao.delete(post);
     }
 
     @Override
     public boolean updatePost(Post post) {
-        return false;
+        if (post==null){
+            return false;
+        }
+        return postDao.update(post);
     }
 
     @Override
     public List<Post> selectAllPost() {
-        return null;
+        return postDao.selectAll();
     }
 
     @Override
     public List<Post> selectPostByKey(Post post) {
-        return null;
+        if (post==null){
+            return null;
+        }
+        return postDao.selectFuzzy(post);
     }
 }

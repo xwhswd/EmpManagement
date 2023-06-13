@@ -1,20 +1,36 @@
 package com.iweb.arui.util;
 
+import com.iweb.arui.Main;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.Socket;
+
 /**
  * @author xwh
  * @version 1.0
  * 2023/6/10
  */
 public class Print {
+    static Socket socket;
+
     public static void print(String str){
-        for (int i = 0; i < str.length(); i++) {
-            System.out.print(str.charAt(i));
-            try {
-                Thread.sleep(80);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        socket= Main.map.get(Thread.currentThread());
+        try {
+            OutputStream os = socket.getOutputStream();
+            DataOutputStream dos = new DataOutputStream(os);
+            dos.writeUTF(str);
+            dos.flush();
+        } catch (IOException e) {
+
+        }finally {
+
         }
-        System.out.println();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

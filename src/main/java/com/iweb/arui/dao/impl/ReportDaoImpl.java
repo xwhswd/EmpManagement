@@ -19,28 +19,34 @@ import java.util.List;
 public class ReportDaoImpl implements ReportDao {
 
     @Override
-    public boolean add(Report report) {
+    public synchronized boolean add(Report report) {
         String  sql="insert into report(report_name,report_msg) values(?,?)";
         boolean flag = false;
-        try(Connection connection = DB_Pool.getConnection();
-            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+        Connection connection=null;
+        try{
+            connection = DB_Pool.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1,report.getReportName());
             ps.setString(2,report.getReportMsg());
-            flag=ps.execute();
+            ps.execute();
+            flag=ps.getUpdateCount()>=1;
         }catch (Exception e){
             e.printStackTrace();
+        }finally {
+            DB_Pool.returnConnection(connection);
         }
         return flag;
     }
 
     @Override
-    public boolean delete(Report report) {
+    public synchronized boolean delete(Report report) {
         String  sql="delete from report where id=?";
         boolean flag = false;
         try(Connection connection = DB_Pool.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql)){
             ps.setLong(1,report.getId());
-            flag=ps.execute();
+            ps.execute();
+            flag=ps.getUpdateCount()>=1;
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -48,15 +54,16 @@ public class ReportDaoImpl implements ReportDao {
     }
 
     @Override
-    public boolean update(Report report) {
-        String  sql="update report set report_name=?,report_msg=? where report_id=?";
+    public synchronized boolean update(Report report) {
+        String  sql="update report set report_name=?,report_msg=? where id=?";
         boolean flag = false;
         try(Connection connection = DB_Pool.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql)){
             ps.setString(1,report.getReportName());
             ps.setString(2,report.getReportMsg());
             ps.setLong(3,report.getId());
-            flag=ps.execute();
+            ps.execute();
+            flag=ps.getUpdateCount()>=1;
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -64,7 +71,7 @@ public class ReportDaoImpl implements ReportDao {
     }
 
     @Override
-    public List<Report> selectAll() {
+    public synchronized List<Report> selectAll() {
         List<Report> list = new ArrayList<>();
         String  sql="select * from report";
         try(Connection connection = DB_Pool.getConnection();
@@ -84,7 +91,7 @@ public class ReportDaoImpl implements ReportDao {
     }
 
     @Override
-    public List<Report> selectFuzzy(Report report) {
+    public synchronized List<Report> selectFuzzy(Report report) {
         List<Report> list = new ArrayList<>();
         String  sql="select * from report where report_name like concat('%',?,'%')" +
                 "and report_msg like concat('%',?,'%')";
@@ -104,5 +111,29 @@ public class ReportDaoImpl implements ReportDao {
             e.printStackTrace();
         }
         return list;
+    }
+
+    @Override
+    public synchronized Report selectById(long id) {
+        String  sql="select * from report where id=?";
+        Connection connection=null;
+        Report report=null;
+        try{
+            connection = DB_Pool.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setLong(1,id);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                report=new Report();
+                report.setId(rs.getLong(1));
+                report.setReportName(rs.getString(2));
+                report.setReportMsg(rs.getString(3));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            DB_Pool.returnConnection(connection);
+        }
+        return report;
     }
 }

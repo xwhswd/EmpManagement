@@ -14,14 +14,18 @@ public class DB_Pool {
     static List<Connection> cs = new ArrayList<>();
     //定义变量指定连接池大小
     static int size;
-
+    static {
+        size = 10;
+        init();
+    }
 
     //定义初始化方法,用来创建连接对象
-    private void init() {
+    public static void init() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             for (int i = 0; i < size; i++) {
-                Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/test1?characterEncoding=utf-8", "root", "123456");
+                Connection c = DriverManager.getConnection
+                        ("jdbc:mysql://localhost:3306/emp_management?characterEncoding=utf8","root","123456");
                 cs.add(c);
             }
         } catch (Exception e) {
@@ -29,25 +33,20 @@ public class DB_Pool {
         }
     }
 
-    //定义构造方法,用于初始化size以及调用init方法创建链接
-    public DB_Pool(int size) {
-        this.size = size;
-        init();
-    }
-
-    public static synchronized Connection getConnection() {
-        while (cs.isEmpty()) {
+    public static synchronized Connection getConnection(){
+        while (cs.isEmpty()){
             try {
                 DB_Pool.class.wait();
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         }
-        return cs.remove(0);
+        Connection c = cs.remove(0);
+        return c;
     }
 
-    public synchronized void returnConnection(Connection c) {
+    public synchronized static void returnConnection(Connection c) {
         cs.add(c);
-        this.notifyAll();
+        DB_Pool.class.notifyAll();
     }
 }

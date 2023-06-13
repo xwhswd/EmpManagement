@@ -20,26 +20,38 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     @Override
     public boolean addDepartment(Department department) {
-        return false;
+        if (department==null){
+            return false;
+        }
+        return departmentDao.add(department);
     }
 
     @Override
     public boolean deleteDepartment(Department department) {
-        return false;
+        if (department==null){
+            return false;
+        }
+        return departmentDao.delete(department);
     }
 
     @Override
     public boolean updateDepartment(Department department) {
-        return false;
+        if (department==null){
+            return false;
+        }
+        return departmentDao.update(department);
     }
 
     @Override
     public List<Department> getAllDepartment() {
-        return null;
+        return departmentDao.selectAll();
     }
 
     @Override
     public List<Department> getDepartmentByKey(Department department) {
-        return null;
+        if (department==null){
+            return null;
+        }
+        return departmentDao.selectFuzzy(department);
     }
 }

@@ -20,26 +20,38 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public boolean addEmployee(Employee employee) {
-        return false;
+        if (employee==null){
+            return false;
+        }
+        return employeeDao.add(employee);
     }
 
     @Override
     public boolean deleteEmployee(Employee employee) {
-        return false;
+        if (employee==null){
+            return false;
+        }
+        return employeeDao.delete(employee);
     }
 
     @Override
     public boolean updateEmployee(Employee employee) {
-        return false;
+        if (employee==null){
+            return false;
+        }
+        return employeeDao.update(employee);
     }
 
     @Override
     public List<Employee> selectAllEmployee() {
-        return null;
+        return employeeDao.selectAll();
     }
 
     @Override
     public List<Employee> selectEmployeeByKey(Employee employee) {
-        return null;
+        if (employee==null){
+            return null;
+        }
+        return employeeDao.selectFuzzy(employee);
     }
 }
