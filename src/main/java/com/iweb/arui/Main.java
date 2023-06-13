@@ -41,7 +41,7 @@ public class Main {
                 executor.execute(printThread);
             }
         } catch (IOException e) {
-        }finally {
+            e.printStackTrace();
         }
     }
 }

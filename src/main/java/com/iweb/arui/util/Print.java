@@ -13,20 +13,17 @@ import java.net.Socket;
  * 2023/6/10
  */
 public class Print {
-    static Socket socket;
 
     public static void print(String str){
-        socket= Main.map.get(Thread.currentThread());
+        Socket socket= Main.map.get(Thread.currentThread());
         try {
             OutputStream os = socket.getOutputStream();
             DataOutputStream dos = new DataOutputStream(os);
             dos.writeUTF(str);
             dos.flush();
         } catch (IOException e) {
-
-        }finally {
-
         }
+
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {

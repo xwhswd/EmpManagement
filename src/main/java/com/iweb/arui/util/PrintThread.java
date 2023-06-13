@@ -29,7 +29,7 @@ public class PrintThread extends Thread{
         try {
             Main.map.put(Thread.currentThread(),socket);
             Main.currentUser.put(Thread.currentThread(),null);
-            System.out.println(Thread.currentThread());
+            System.out.println("启动线程"+Thread.currentThread());
             while (true){
                 if (socket.isConnected()) {
                     MainView.mainView();
