@@ -48,7 +48,6 @@ public class MainView {
         if (inputConfirmCode.equals(randomConfirmCode)) {
             User inputUser = new User(0, inputUserName, inputPassword, "普通用户", null);
             boolean flag = userService.login(inputUser);
-            System.out.println(flag);
             if (flag) {
                 MainView.userView();
             } else {
