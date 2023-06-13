@@ -45,7 +45,7 @@ public class UserController {
         switch (choose) {
             case "1":
                 Print.print("进入员工管理页面:");
-                PostManageView.postManageView();
+                EmpManageView.empManageView();
                 break;
             case "2":
                 Print.print("进入部门管理页面:");
@@ -53,7 +53,7 @@ public class UserController {
                 break;
             case "3":
                 Print.print("进入职位管理页面:");
-                EmpManageView.empManageView();
+                PostManageView.postManageView();
                 break;
             case "4":
                 userService.unLogin(Main.currentUser.get(Thread.currentThread()));
@@ -66,6 +66,7 @@ public class UserController {
                 for (Report r:list) {
                     Print.print(r.toString());
                 }
+                MainView.userView();
             default:
         }
     }

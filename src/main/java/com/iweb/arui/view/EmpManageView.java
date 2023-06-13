@@ -28,7 +28,7 @@ public class EmpManageView {
         Print.print("请选择要进行的操作");
         Print.print("1.添加员工");
         Print.print("2.删除员工");
-        Print.print("3.删除员工");
+        Print.print("3.更新员工");
         Print.print("4.查询所有员工");
         Print.print("5.模糊筛选员工");
         Print.print("6.返回用户界面");

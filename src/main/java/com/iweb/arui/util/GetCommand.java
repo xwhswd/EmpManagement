@@ -11,7 +11,7 @@ import java.net.Socket;
  * 2023/6/12
  */
 public class GetCommand {
-    public static  String nextLine(){
+    public static String nextLine(){
         String msg = null;
         try {
             Socket socket= Main.map.get(Thread.currentThread());

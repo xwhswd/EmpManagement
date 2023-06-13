@@ -26,7 +26,7 @@ public class PostManageView {
         Print.print("请选择要进行的操作");
         Print.print("1.添加职位");
         Print.print("2.删除职位");
-        Print.print("3.删除职位");
+        Print.print("3.更新职位");
         Print.print("4.查询所有职位");
         Print.print("5.模糊筛选职位");
         Print.print("6.返回用户界面");
