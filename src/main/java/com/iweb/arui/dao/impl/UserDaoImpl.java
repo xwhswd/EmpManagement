@@ -27,7 +27,7 @@ public class UserDaoImpl implements UserDao {
         Connection connection = null;
         try{
             connection = DB_Pool.getConnection();
-            if (selectByUsername(user.getUsername())!=null){
+            if (user==null||selectByUsername(user.getUsername())!=null){
                 return false;
             }
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

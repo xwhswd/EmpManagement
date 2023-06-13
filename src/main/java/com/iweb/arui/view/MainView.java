@@ -52,7 +52,7 @@ public class MainView {
             if (flag) {
                 MainView.userView();
             } else {
-                Print.print("输入错误,请重新输入");
+                Print.print("输入错误或该用户已被登录,请重新输入");
                 MainView.mainView();
             }
         }
@@ -79,7 +79,14 @@ public class MainView {
         //数据封装在User对象中
         User registerUser = new User(0,inputUserName, inputPassword,"普通用户","未登录");
         //将数据交给业务类的注册方法进行逻辑判断
-        userService.register(registerUser);
+        boolean register = userService.register(registerUser);
+        if (register){
+            Print.print("注册成功");
+            MainView.mainView();
+        }else {
+            Print.print("注册失败,请重新输入");
+            MainView.registerView();
+        }
     }
 
     public static void updateUser() {

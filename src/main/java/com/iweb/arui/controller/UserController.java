@@ -33,6 +33,7 @@ public class UserController {
             case "3":
                 //跳转到管理员登录界面
                 AdminController.adminController("1");
+                break;
             default:
                 //输入错误
                 Print.print("输入错误信息,请重新输入");
